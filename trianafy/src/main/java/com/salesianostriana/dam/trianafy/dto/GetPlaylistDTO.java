@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PlaylistDTO {
+public class GetPlaylistDTO {
 
     private Long id;
     private String nombre;
