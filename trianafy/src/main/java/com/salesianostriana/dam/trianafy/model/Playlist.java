@@ -22,5 +22,6 @@ public class Playlist {
     private String nombre;
     private String descripcion;
     //@ElementCollection
+    //@ManyToMany
     //private List <Song> listaCanciones;
 }
