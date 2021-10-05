@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Tag(name = "Playlist", description = "Controller de las playlists")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/playlist")
+@RequestMapping("/list")
 public class PlaylistController {
 
     private final PlaylistRepository repository;
@@ -40,21 +40,27 @@ public class PlaylistController {
         }
     }
 
-    @PutMapping("/")
+    @PutMapping("/{id}")
     public ResponseEntity<Playlist> edit(
         @RequestBody Playlist p,
         @PathVariable Long id){
             return ResponseEntity.of(repository.findById(id).map(m -> {
-                m.setNombre(p.getNombre());
-                m.setDescripcion(p.getDescripcion());
-                repository.save(m);
-                return m;
-            }));
-        }
+            m.setNombre(p.getNombre());
+            m.setDescripcion(p.getDescripcion());
+            repository.save(m);
+            return m;
+        }));
     }
 
-
-
-
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Playlist> delete(@PathVariable Long id){
+        repository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
+
+
+
+
+
+
