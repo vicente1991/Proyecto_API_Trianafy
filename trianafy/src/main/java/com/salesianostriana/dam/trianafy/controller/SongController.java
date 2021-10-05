@@ -16,7 +16,7 @@ public class SongController {
 
     private final SongRepository repository;
 
-    @PostMapping("/")
+    @PostMapping("/songs")
     public ResponseEntity<Song> create(@RequestBody Song nueva){
         return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(nueva));
     }
