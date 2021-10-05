@@ -25,7 +25,6 @@ public class Song {
 
 
 
-
-    public Song(Long id, String titulo, String nombre, String album, String anio) {
+    public Song(Long id, String titulo, Artista artista, String album, String anio) {
     }
 }
