@@ -5,6 +5,7 @@ import com.salesianostriana.dam.trianafy.dto.PlaylistDTOConverter;
 import com.salesianostriana.dam.trianafy.model.Playlist;
 import com.salesianostriana.dam.trianafy.repository.PlaylistRepository;
 import com.salesianostriana.dam.trianafy.repository.SongRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Tag(name = "Playlist", description = "Controller de las playlists")
 @RestController
 @RequiredArgsConstructor
 public class PlaylistController {
