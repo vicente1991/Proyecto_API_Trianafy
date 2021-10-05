@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.module.ResolutionException;
 import java.util.List;
@@ -22,13 +23,14 @@ import java.util.stream.Collectors;
 @Tag(name = "Playlist", description = "Controller de las playlists")
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/lists")
 public class PlaylistController {
 
     private final PlaylistRepository repository;
     private final PlaylistDTOConverter converter;
     private final SongRepository songRepository;
 
-    @GetMapping("/lists")
+    @GetMapping("/")
     public ResponseEntity<List<GetPlaylistDTO>> findAll(){
 
         List<Playlist> lista = repository.findAll();
@@ -45,7 +47,7 @@ public class PlaylistController {
         }
     }
 
-    @PostMapping("/lists")
+    @PostMapping("/")
     public ResponseEntity<Playlist> add(@RequestBody CreatePlaylistDTO p){
 
         if(p.getNombre().isEmpty()){
@@ -62,4 +64,22 @@ public class PlaylistController {
 
     }
 
-}
+    @PutMapping("/")
+    public ResponseEntity<Playlist> edit(
+        @RequestBody Playlist p,
+        @PathVariable Long id){
+            return ResponseEntity.of(repository.findById(id).map(m -> {
+                m.setNombre(p.getNombre());
+                m.setDescripcion(p.getDescripcion());
+                repository.save(m);
+                return m;
+            }));
+        }
+    }
+
+
+
+
+
+
+
