@@ -54,7 +54,7 @@ public class PlaylistController {
             return ResponseEntity.badRequest().build();
         }
 
-        Playlist nueva = converter.createPlaylistDTOToPlaylisy(p);
+        Playlist nueva = converter.createPlaylistDTOToPlaylist(p);
 
         //Devuelve una playlist sin canciones todavía)
 

@@ -20,10 +20,16 @@ public class Song {
 
     @ManyToOne
     private Artista artista;
+
     private String album;
     private String anio;
 
-
+    public Song(Long id, String titulo, String album, String anio) {
+        this.id = id;
+        this.titulo = titulo;
+        this.album = album;
+        this.anio = anio;
+    }
 
     public Song(Long id, String titulo, Artista artista, String album, String anio) {
     }

@@ -14,7 +14,7 @@ public class PlaylistDTOConverter {
                 .build();
     }
 
-    public Playlist createPlaylistDTOToPlaylisy(CreatePlaylistDTO cp) {
+    public Playlist createPlaylistDTOToPlaylist(CreatePlaylistDTO cp) {
         return new Playlist(
                 cp.getId(),
                 cp.getNombre(),
