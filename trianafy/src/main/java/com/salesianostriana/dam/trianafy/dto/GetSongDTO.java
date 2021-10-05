@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class GetSongDTO {
     private Long id;
     private String titulo;
-    private Long nombreArtista;
+    private String nombreArtista;
     private String album;
     private String anio;
 }
