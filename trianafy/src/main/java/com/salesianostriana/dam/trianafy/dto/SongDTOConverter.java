@@ -9,9 +9,10 @@ public class SongDTOConverter {
         return new Song(
                 s.getId(),
                 s.getTitulo(),
-                s.getArtistaiD(),
+                s.getArtista().getNombre(),
                 s.getAlbum(),
                 s.getAnio()
+
         );
     }
 

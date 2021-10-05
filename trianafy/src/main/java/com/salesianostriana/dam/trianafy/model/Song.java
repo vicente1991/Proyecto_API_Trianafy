@@ -24,6 +24,8 @@ public class Song {
     private String anio;
 
 
-    public Song(Long id, String titulo, Long artistaiD, String album, String anio) {
+
+
+    public Song(Long id, String titulo, String nombre, String album, String anio) {
     }
 }
