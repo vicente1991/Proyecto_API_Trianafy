@@ -8,8 +8,7 @@ import com.salesianostriana.dam.trianafy.repository.SongRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,13 +16,14 @@ import java.util.stream.Collectors;
 @Tag(name = "Playlist", description = "Controller de las playlists")
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/playlist")
 public class PlaylistController {
 
     private final PlaylistRepository repository;
     private final PlaylistDTOConverter converter;
     private final SongRepository songRepository;
 
-    @GetMapping("/lists")
+    @GetMapping("/")
     public ResponseEntity<List<GetPlaylistDTO>> findAll(){
 
         List<Playlist> lista = repository.findAll();
@@ -39,4 +39,22 @@ public class PlaylistController {
             return ResponseEntity.ok().body(resultado);
         }
     }
+
+    @PutMapping("/")
+    public ResponseEntity<Playlist> edit(
+        @RequestBody Playlist p,
+        @PathVariable Long id){
+            return ResponseEntity.of(repository.findById(id).map(m -> {
+                m.setNombre(p.getNombre());
+                m.setDescripcion(p.getDescripcion());
+                repository.save(m);
+                return m;
+            }));
+        }
+    }
+
+
+
+
+
 }
