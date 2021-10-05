@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,7 +19,8 @@ public class Playlist {
 
     private String nombre;
     private String descripcion;
-    //@ElementCollection
-    //@ManyToMany
-    //private List <Song> listaCanciones;
+
+    @ManyToMany
+    @ElementCollection
+    private List<Song> listaCanciones;
 }

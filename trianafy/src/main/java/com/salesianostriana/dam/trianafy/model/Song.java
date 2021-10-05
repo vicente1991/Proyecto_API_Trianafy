@@ -12,10 +12,12 @@ import javax.persistence.ManyToOne;
 @Data
 @NoArgsConstructor
 public class Song {
+
     @Id
     @GeneratedValue
     private Long id;
     private String titulo;
+
     @ManyToOne
     private Artista artista;
     private String album;
