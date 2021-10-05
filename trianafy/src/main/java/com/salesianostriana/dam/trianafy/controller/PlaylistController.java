@@ -4,6 +4,7 @@ import com.salesianostriana.dam.trianafy.dto.CreatePlaylistDTO;
 import com.salesianostriana.dam.trianafy.dto.GetPlaylistDTO;
 import com.salesianostriana.dam.trianafy.dto.PlaylistDTOConverter;
 import com.salesianostriana.dam.trianafy.model.Playlist;
+import com.salesianostriana.dam.trianafy.model.Song;
 import com.salesianostriana.dam.trianafy.repository.PlaylistRepository;
 import com.salesianostriana.dam.trianafy.repository.SongRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,11 +20,14 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.module.ResolutionException;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Tag(name = "Playlist", description = "Controller de las playlists")
 @RestController
 @RequiredArgsConstructor
+
 @RequestMapping("/lists")
+
 public class PlaylistController {
 
     private final PlaylistRepository repository;
@@ -47,6 +51,7 @@ public class PlaylistController {
         }
     }
 
+
     @PostMapping("/")
     public ResponseEntity<Playlist> add(@RequestBody CreatePlaylistDTO p){
 
@@ -69,17 +74,25 @@ public class PlaylistController {
         @RequestBody Playlist p,
         @PathVariable Long id){
             return ResponseEntity.of(repository.findById(id).map(m -> {
-                m.setNombre(p.getNombre());
-                m.setDescripcion(p.getDescripcion());
-                repository.save(m);
-                return m;
-            }));
-        }
+            m.setNombre(p.getNombre());
+            m.setDescripcion(p.getDescripcion());
+            repository.save(m);
+            return m;
+        }));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Playlist> delete(@PathVariable Long id){
+        repository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 
+    @GetMapping("/{id}/song/{id}")
+    public ResponseEntity<Stream<Song>> findSongOfPlayList(@PathVariable Long idList, @PathVariable Long idSong){
+        return ResponseEntity.of(repository.findById(idList).map(m ->{
+            return (m.getListaCanciones().stream().filter(song -> song.getId().equals(idSong)));
+        }));
 
-
-
-
+    }
+}
 
