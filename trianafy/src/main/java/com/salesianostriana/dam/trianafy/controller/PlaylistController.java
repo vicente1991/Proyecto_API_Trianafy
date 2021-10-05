@@ -1,8 +1,6 @@
 package com.salesianostriana.dam.trianafy.controller;
 
-import com.salesianostriana.dam.trianafy.dto.CreatePlaylistDTO;
-import com.salesianostriana.dam.trianafy.dto.GetPlaylistDTO;
-import com.salesianostriana.dam.trianafy.dto.PlaylistDTOConverter;
+import com.salesianostriana.dam.trianafy.dto.*;
 import com.salesianostriana.dam.trianafy.model.Playlist;
 import com.salesianostriana.dam.trianafy.model.Song;
 import com.salesianostriana.dam.trianafy.repository.PlaylistRepository;
@@ -33,6 +31,7 @@ public class PlaylistController {
     private final PlaylistRepository repository;
     private final PlaylistDTOConverter converter;
     private final SongRepository songRepository;
+    private final SongDTOConverter songDTOConverter;
 
     @GetMapping("/")
     public ResponseEntity<List<GetPlaylistDTO>> findAll(){
@@ -80,6 +79,21 @@ public class PlaylistController {
             return m;
         }));
     }
+
+    /*@GetMapping("/{id}/songs")
+    public ResponseEntity<List<GetSongDTO>> findSongsOfPlaylist(@PathVariable Long idLista){
+
+        if(repository.findById(idLista).isEmpty()){
+            return ResponseEntity.notFound().build();
+        } else{
+            List <GetSongDTO> resultado = repository.findById(idLista)
+                    .map(songDTOConverter::songToGetSongDto).stream().toList();
+
+            return ResponseEntity.ok().body(resultado);
+        }
+
+    }*/
+    //coger la lista de canciones de la playlist y acceder a ella, para ello buscamos el id de la playlist
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Playlist> delete(@PathVariable Long id){
