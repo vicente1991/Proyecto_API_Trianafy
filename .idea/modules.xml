@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Proyecto_API_Trianafy.iml" filepath="$PROJECT_DIR$/.idea/Proyecto_API_Trianafy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trianafy/trianafy.iml" filepath="$PROJECT_DIR$/trianafy/trianafy.iml" />
+    </modules>
+  </component>
+</project>
