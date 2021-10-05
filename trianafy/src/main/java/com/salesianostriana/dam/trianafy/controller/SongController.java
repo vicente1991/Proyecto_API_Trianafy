@@ -37,5 +37,14 @@ public class SongController {
         );
 
     }
+
+    /*
+    Este metodo ayuda a buscar una sola canción por su id
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity findOne(@PathVariable Long id){
+        return ResponseEntity
+                .of(repository.findById(id));
+    }
 }
 
