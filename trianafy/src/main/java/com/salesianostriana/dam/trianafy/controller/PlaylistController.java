@@ -57,6 +57,9 @@ public class PlaylistController {
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{id}/song/{id}")
+    public ResponseEntity<Song>findSongOfPlayList(@PathVariable)
 }
 
 
