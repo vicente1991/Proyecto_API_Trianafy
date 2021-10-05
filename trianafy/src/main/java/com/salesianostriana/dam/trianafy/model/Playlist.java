@@ -23,4 +23,10 @@ public class Playlist {
     @ManyToMany
     @ElementCollection
     private List<Song> listaCanciones;
+
+    public Playlist(Long id, String nombre, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
 }
