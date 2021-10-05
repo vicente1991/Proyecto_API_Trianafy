@@ -5,12 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateArtistaDTO {
+public class CreatePlaylistDTO {
 
     private Long id;
     private String nombre;
+    private String descripcion;
 }
