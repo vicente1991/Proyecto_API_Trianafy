@@ -11,7 +11,6 @@ public class SongDTOConverter {
         return new Song(
                 s.getId(),
                 s.getTitulo(),
-                s.getArtista(),
                 s.getAlbum(),
                 s.getAnio()
 
