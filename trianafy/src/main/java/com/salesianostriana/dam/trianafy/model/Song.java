@@ -30,8 +30,5 @@ public class Song {
         this.album = album;
         this.anio = anio;
     }
-
-
-    public Song(String titulo, Long idartista, String album, String anio) {
-    }
+  
 }

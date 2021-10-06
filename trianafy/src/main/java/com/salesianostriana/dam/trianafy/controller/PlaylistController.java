@@ -1,8 +1,6 @@
 package com.salesianostriana.dam.trianafy.controller;
 
-import com.salesianostriana.dam.trianafy.dto.CreatePlaylistDTO;
-import com.salesianostriana.dam.trianafy.dto.GetPlaylistDTO;
-import com.salesianostriana.dam.trianafy.dto.PlaylistDTOConverter;
+import com.salesianostriana.dam.trianafy.dto.*;
 import com.salesianostriana.dam.trianafy.model.Playlist;
 import com.salesianostriana.dam.trianafy.model.Song;
 import com.salesianostriana.dam.trianafy.repository.PlaylistRepository;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.lang.module.ResolutionException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,6 +32,7 @@ public class PlaylistController {
     private final PlaylistRepository repository;
     private final PlaylistDTOConverter converter;
     private final SongRepository songRepository;
+    private final SongDTOConverter songDTOConverter;
 
     @GetMapping("/")
     public ResponseEntity<List<GetPlaylistDTO>> findAll(){
@@ -50,7 +50,13 @@ public class PlaylistController {
             return ResponseEntity.ok().body(resultado);
         }
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Playlist> findOne(@PathVariable Long id){
 
+        return ResponseEntity
+                .of(repository.findById(id));
+
+    }
 
     @PostMapping("/")
     public ResponseEntity<Playlist> add(@RequestBody CreatePlaylistDTO p){
@@ -81,6 +87,27 @@ public class PlaylistController {
         }));
     }
 
+    @GetMapping("/{id}/songs")
+    public ResponseEntity<List<GetSongDTO>> findSongsOfPlaylist(@PathVariable Long idLista){
+
+        Optional<Playlist> optPlaylist = repository.findById(idLista);
+
+        if(optPlaylist.isEmpty()){
+            return ResponseEntity.notFound().build();
+        } else{
+            Playlist playlist = optPlaylist.get();
+            List <GetSongDTO> resultado = playlist
+                    .getListaCanciones()
+                    .stream()
+                    .map(songDTOConverter::songToGetSongDto)
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok().body(resultado);
+        }
+
+    }
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Playlist> delete(@PathVariable Long id){
         repository.deleteById(id);
@@ -89,9 +116,10 @@ public class PlaylistController {
 
     @GetMapping("/{id}/song/{id}")
     public ResponseEntity<Stream<Song>> findSongOfPlayList(@PathVariable Long idList, @PathVariable Long idSong){
-        return ResponseEntity.of(repository.findById(idList).map(m ->{
-            return (m.getListaCanciones().stream().filter(song -> song.getId().equals(idSong)));
-        }));
+        return ResponseEntity.of(repository.findById(idList)
+                        .map(m -> (m.getListaCanciones()
+                        .stream().filter(song -> song.getId().equals(idSong)))
+        ));
 
     }
 }
