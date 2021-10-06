@@ -23,4 +23,18 @@ public class PlaylistDTOConverter {
                 cp.getDescripcion());
 
     }
+
+    public GetPlaylistContDTO playlistToGetPlaylistContDTO(Playlist p) {
+        return GetPlaylistContDTO
+                .builder().
+                nombre(p.getNombre())
+                .descripcion(p.getDescripcion())
+                .id(p.getId())
+                .contador(0)
+                .build();
+    }
+
+
+
+
 }
