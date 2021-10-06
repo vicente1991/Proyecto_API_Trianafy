@@ -81,19 +81,26 @@ public class PlaylistController {
         }));
     }
 
-    /*@GetMapping("/{id}/songs")
+    @GetMapping("/{id}/songs")
     public ResponseEntity<List<GetSongDTO>> findSongsOfPlaylist(@PathVariable Long idLista){
 
-        if(repository.findById(idLista).isEmpty()){
+        Optional<Playlist> optPlaylist = repository.findById(idLista);
+
+        if(optPlaylist.isEmpty()){
             return ResponseEntity.notFound().build();
         } else{
-            Optional <GetSongDTO> resultado = repository.findById(idLista).map(m -> m.getListaCanciones())
+            Playlist playlist = optPlaylist.get();
+            List <GetSongDTO> resultado = playlist
+                    .getListaCanciones()
+                    .stream()
+                    .map(songDTOConverter::songToGetSongDto)
+                    .collect(Collectors.toList());
 
             return ResponseEntity.ok().body(resultado);
         }
 
-    }*/
-    //coger la lista de canciones de la playlist y acceder a ella, para ello buscamos el id de la playlist
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Playlist> delete(@PathVariable Long id){
@@ -103,9 +110,10 @@ public class PlaylistController {
 
     @GetMapping("/{id}/song/{id}")
     public ResponseEntity<Stream<Song>> findSongOfPlayList(@PathVariable Long idList, @PathVariable Long idSong){
-        return ResponseEntity.of(repository.findById(idList).map(m ->{
-            return (m.getListaCanciones().stream().filter(song -> song.getId().equals(idSong)));
-        }));
+        return ResponseEntity.of(repository.findById(idList)
+                        .map(m -> (m.getListaCanciones()
+                        .stream().filter(song -> song.getId().equals(idSong)))
+        ));
 
     }
 }
