@@ -69,7 +69,7 @@ public class PlaylistController {
 
     }
 
-    @PutMapping("/")
+    @PutMapping("/{id}")
     public ResponseEntity<Playlist> edit(
         @RequestBody Playlist p,
         @PathVariable Long id){

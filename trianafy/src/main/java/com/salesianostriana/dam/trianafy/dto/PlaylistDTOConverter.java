@@ -11,6 +11,7 @@ public class PlaylistDTOConverter {
                 .builder().
                 nombre(p.getNombre())
                 .descripcion(p.getDescripcion())
+                .id(p.getId())
                 .build();
     }
 
