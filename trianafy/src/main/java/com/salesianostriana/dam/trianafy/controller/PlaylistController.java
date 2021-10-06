@@ -50,7 +50,13 @@ public class PlaylistController {
             return ResponseEntity.ok().body(resultado);
         }
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Playlist> findOne(@PathVariable Long id){
 
+        return ResponseEntity
+                .of(repository.findById(id));
+
+    }
 
     @PostMapping("/")
     public ResponseEntity<Playlist> add(@RequestBody CreatePlaylistDTO p){
