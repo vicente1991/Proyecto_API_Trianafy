@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateSongDTO {
 
-    private Long id;
+
     private String titulo;
-    private Artista artista;
+    private Long idartista;
     private String album;
     private String anio;
 

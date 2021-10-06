@@ -62,19 +62,19 @@ public class SongController {
     public ResponseEntity<Song> create(@RequestBody CreateSongDTO songDto) {
 
 
-        if(songDto.getArtista().getId()==null){
+        if(songDto.getIdartista()==null){
             return ResponseEntity.badRequest().build(); //Código 400, petición errónea
         }
 
-        Song nueva = converter.createSongDtoToSong(songDto);
+        Song nuevo = converter.createSongDtoToSong(songDto);
 
-        Artista artist = artistaRepository.findById(songDto.getArtista().getId()).orElse(null);
+        Artista artist = artistaRepository.findById(songDto.getIdartista()).orElse(null);
 
-        nueva.setArtista(artist);
+        nuevo.setArtista(artist);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(repository.save(nueva));
+                .body(repository.save(nuevo));
 
     }
 

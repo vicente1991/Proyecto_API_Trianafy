@@ -24,13 +24,14 @@ public class Song {
     private String album;
     private String anio;
 
-    public Song(Long id, String titulo, String album, String anio) {
-        this.id = id;
+    public Song( String titulo, String album, String anio) {
+
         this.titulo = titulo;
         this.album = album;
         this.anio = anio;
     }
 
-    public Song(Long id, String titulo, Artista artista, String album, String anio) {
+
+    public Song(String titulo, Long idartista, String album, String anio) {
     }
 }

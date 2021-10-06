@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class GetSongDTO {
-    private Long id;
+
     private String titulo;
-    private String nombreArtista;
+    private String artista;
     private String album;
     private String anio;
 }
