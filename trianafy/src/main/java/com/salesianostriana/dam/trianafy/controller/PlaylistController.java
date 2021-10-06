@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.lang.module.ResolutionException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -83,11 +84,12 @@ public class PlaylistController {
     /*@GetMapping("/{id}/songs")
     public ResponseEntity<List<GetSongDTO>> findSongsOfPlaylist(@PathVariable Long idLista){
 
+
+
         if(repository.findById(idLista).isEmpty()){
             return ResponseEntity.notFound().build();
         } else{
-            List <GetSongDTO> resultado = repository.findById(idLista)
-                    .map(songDTOConverter::songToGetSongDto).stream().toList();
+            Optional <GetSongDTO> resultado = repository.findById(idLista).map(m -> m.getListaCanciones())
 
             return ResponseEntity.ok().body(resultado);
         }
