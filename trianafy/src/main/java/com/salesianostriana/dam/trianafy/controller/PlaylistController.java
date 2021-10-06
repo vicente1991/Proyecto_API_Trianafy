@@ -84,8 +84,6 @@ public class PlaylistController {
     /*@GetMapping("/{id}/songs")
     public ResponseEntity<List<GetSongDTO>> findSongsOfPlaylist(@PathVariable Long idLista){
 
-
-
         if(repository.findById(idLista).isEmpty()){
             return ResponseEntity.notFound().build();
         } else{
