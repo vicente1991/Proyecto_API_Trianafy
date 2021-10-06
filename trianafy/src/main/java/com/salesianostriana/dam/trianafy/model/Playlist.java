@@ -29,4 +29,7 @@ public class Playlist {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
+
+    public Playlist(Long id, String nombre, String descripcion, int contador) {
+    }
 }

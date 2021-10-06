@@ -35,7 +35,7 @@ public class PlaylistController {
     private final SongDTOConverter songDTOConverter;
 
     @GetMapping("/")
-    public ResponseEntity<List<GetPlaylistDTO>> findAll(){
+    public ResponseEntity<List<GetPlaylistContDTO>> findAll(){
 
         List<Playlist> lista = repository.findAll();
 
@@ -43,8 +43,8 @@ public class PlaylistController {
             return ResponseEntity.notFound().build();
 
         }else {
-            List <GetPlaylistDTO> resultado = lista.stream()
-                                              .map(converter::playlistToGetPlaylistDTO)
+            List <GetPlaylistContDTO> resultado = lista.stream()
+                                              .map(converter::playlistToGetPlaylistContDTO)
                                               .collect(Collectors.toList());
 
             return ResponseEntity.ok().body(resultado);
@@ -74,6 +74,29 @@ public class PlaylistController {
                 .body(repository.save(nueva));
 
     }
+
+    @PostMapping("/{id1}/songs/{id2}")
+    public ResponseEntity<Playlist> addSong (@PathVariable("id1") Long id1,
+                                             @PathVariable("id2") Long id2){
+        Song song = songRepository.getById(id2);
+        Playlist list= repository.getById(id1);
+
+        if (list == null || song == null){
+
+            return ResponseEntity.badRequest().build();
+
+        }else {
+            list.getListaCanciones().add(song);
+
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(repository.save(list));
+
+        }
+    }
+
+
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Playlist> edit(
