@@ -75,6 +75,29 @@ public class PlaylistController {
 
     }
 
+    @PostMapping("/{id1}/songs/{id2}")
+    public ResponseEntity<Playlist> addSong (@PathVariable("id1") Long id1,
+                                             @PathVariable("id2") Long id2){
+        Song song = songRepository.getById(id2);
+        Playlist list= repository.getById(id1);
+
+        if (list == null || song == null){
+
+            return ResponseEntity.badRequest().build();
+
+        }else {
+            list.getListaCanciones().add(song);
+
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(repository.save(list));
+
+        }
+    }
+
+
+
+
     @PutMapping("/{id}")
     public ResponseEntity<Playlist> edit(
         @RequestBody Playlist p,
