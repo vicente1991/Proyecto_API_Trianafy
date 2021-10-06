@@ -97,29 +97,6 @@ public class PlaylistController {
      * @since v1 5/10/2021
      * @return Este metodo edita una playlist a partir de una id
      */
-    @PostMapping("/{id1}/songs/{id2}")
-    public ResponseEntity<Playlist> addSong (@PathVariable("id1") Long id1,
-                                             @PathVariable("id2") Long id2){
-        Song song = songRepository.getById(id2);
-        Playlist list= repository.getById(id1);
-
-        if (list == null || song == null){
-
-            return ResponseEntity.badRequest().build();
-
-        }else {
-            list.getListaCanciones().add(song);
-
-            return ResponseEntity
-                    .status(HttpStatus.CREATED)
-                    .body(repository.save(list));
-
-        }
-    }
-
-
-
-
 
     @PutMapping("/{id}")
     public ResponseEntity<Playlist> edit(
@@ -132,6 +109,29 @@ public class PlaylistController {
             return m;
         }));
     }
+
+
+
+    @PostMapping("/{idPlaylist}/songs/{idSong}")
+    public ResponseEntity<Playlist> newPlaySong(@RequestBody Playlist playlist, @PathVariable Long idPlaylist,
+                                                @PathVariable Long idSong) {
+
+        if ((repository.findById(idPlaylist) == null) || (songRepository.findById(idSong) == null)){
+            return ResponseEntity.badRequest().build();
+        }else {
+            Playlist playlist1 = repository.findById(idPlaylist).orElse(null);
+
+            Song song1 = songRepository.findById(idSong).orElse(null);
+            playlist1.getListaCanciones().add(song1);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(repository.save(playlist1));
+
+        }
+
+
+    }
+
 
     /**
      * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
