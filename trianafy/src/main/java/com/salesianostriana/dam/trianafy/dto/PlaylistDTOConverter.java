@@ -24,11 +24,17 @@ public class PlaylistDTOConverter {
 
     }
 
-    public Playlist createPlayListContDTOToPlaylist(CreatePlaylistContDTO ccp){
-        return new Playlist(
-                ccp.getId(),
-                ccp.getNombre(),
-                ccp.getDescripcion(),
-                ccp.getContador());
+    public GetPlaylistContDTO playlistToGetPlaylistContDTO(Playlist p) {
+        return GetPlaylistContDTO
+                .builder().
+                nombre(p.getNombre())
+                .descripcion(p.getDescripcion())
+                .id(p.getId())
+                .contador(0)
+                .build();
     }
+
+
+
+
 }

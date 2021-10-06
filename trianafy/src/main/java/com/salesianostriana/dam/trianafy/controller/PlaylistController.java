@@ -35,7 +35,7 @@ public class PlaylistController {
     private final SongDTOConverter songDTOConverter;
 
     @GetMapping("/")
-    public ResponseEntity<List<GetPlaylistDTO>> findAll(){
+    public ResponseEntity<List<GetPlaylistContDTO>> findAll(){
 
         List<Playlist> lista = repository.findAll();
 
@@ -43,8 +43,8 @@ public class PlaylistController {
             return ResponseEntity.notFound().build();
 
         }else {
-            List <GetPlaylistDTO> resultado = lista.stream()
-                                              .map(converter::playlistToGetPlaylistDTO)
+            List <GetPlaylistContDTO> resultado = lista.stream()
+                                              .map(converter::playlistToGetPlaylistContDTO)
                                               .collect(Collectors.toList());
 
             return ResponseEntity.ok().body(resultado);
