@@ -15,7 +15,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
+/**
 
+ * Esta clase se usa para controllar las canciones (Añadir canciones, ver canciones, editar canciones y eliminarlas)
+
+ * @author: Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
+
+ * @version: 1
+
+ */
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +34,10 @@ public class SongController {
     private final ArtistaRepository artistaRepository;
     private final SongDTOConverter converter;
 
+    /**
+     * Metodo que devuelve todas las canciones existentes
+     * @return Devuelve que devuelve todas las canciones existentes
+     */
     @GetMapping("/")
     public ResponseEntity<List<GetSongDTO>> findAll() {
 
@@ -51,13 +63,25 @@ public class SongController {
     /*
    Este metodo ayuda a buscar una sola canción por su id
     */
+
+
+
+
+
+    /**
+     * Metodo que devuelve los datos de una cancion en concreto
+     * @return Devuelve los datos de una cancion en concreto
+     */
+
     @GetMapping("/{id}")
     public ResponseEntity findOne(@PathVariable Long id) {
         return ResponseEntity
                 .of(repository.findById(id));
     }
 
-
+    /**
+     * Metodo que crea una cancion
+     */
     @PostMapping("/")
     public ResponseEntity<Song> create(@RequestBody CreateSongDTO songDto) {
 
@@ -77,7 +101,10 @@ public class SongController {
                 .body(repository.save(nuevo));
 
     }
-
+    /**
+     * Metodo que edita los datos de la cancion
+     * @return Devuelve los datos de la cancion editados
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Song> edit(
             @RequestBody Song s,
@@ -95,7 +122,9 @@ public class SongController {
         );
 
     }
-
+    /**
+     * Metodo que borrar los datos de la cancion
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id){
         repository.deleteById(id);

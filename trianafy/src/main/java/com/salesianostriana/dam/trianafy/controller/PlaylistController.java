@@ -34,8 +34,13 @@ public class PlaylistController {
     private final SongRepository songRepository;
     private final SongDTOConverter songDTOConverter;
 
+    /**
+     * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
+     * @since v1 5/10/2021
+     * @return Este metodo devuelve todas las playlist existentes
+     */
     @GetMapping("/")
-    public ResponseEntity<List<GetPlaylistDTO>> findAll(){
+    public ResponseEntity<List<GetPlaylistContDTO>> findAll(){
 
         List<Playlist> lista = repository.findAll();
 
@@ -43,13 +48,20 @@ public class PlaylistController {
             return ResponseEntity.notFound().build();
 
         }else {
-            List <GetPlaylistDTO> resultado = lista.stream()
-                                              .map(converter::playlistToGetPlaylistDTO)
+            List <GetPlaylistContDTO> resultado = lista.stream()
+                                              .map(converter::playlistToGetPlaylistContDTO)
                                               .collect(Collectors.toList());
 
             return ResponseEntity.ok().body(resultado);
         }
     }
+
+
+    /**
+     * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
+     * @since v1 5/10/2021
+     * @return Este metodo devuelve una playlist a traves de la id
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Playlist> findOne(@PathVariable Long id){
 
@@ -58,6 +70,11 @@ public class PlaylistController {
 
     }
 
+    /**
+     * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
+     * @since v1 5/10/2021
+     * @return Este metodo añade una nueva playlist
+     */
     @PostMapping("/")
     public ResponseEntity<Playlist> add(@RequestBody CreatePlaylistDTO p){
 
@@ -75,6 +92,12 @@ public class PlaylistController {
 
     }
 
+    /**
+     * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
+     * @since v1 5/10/2021
+     * @return Este metodo edita una playlist a partir de una id
+     */
+
     @PutMapping("/{id}")
     public ResponseEntity<Playlist> edit(
         @RequestBody Playlist p,
@@ -87,6 +110,34 @@ public class PlaylistController {
         }));
     }
 
+
+
+    @PostMapping("/{idPlaylist}/songs/{idSong}")
+    public ResponseEntity<Playlist> newPlaySong(@RequestBody Playlist playlist, @PathVariable Long idPlaylist,
+                                                @PathVariable Long idSong) {
+
+        if ((repository.findById(idPlaylist) == null) || (songRepository.findById(idSong) == null)){
+            return ResponseEntity.badRequest().build();
+        }else {
+            Playlist playlist1 = repository.findById(idPlaylist).orElse(null);
+
+            Song song1 = songRepository.findById(idSong).orElse(null);
+            playlist1.getListaCanciones().add(song1);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(repository.save(playlist1));
+
+        }
+
+
+    }
+
+
+    /**
+     * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
+     * @since v1 5/10/2021
+     * @return Este metodo se le pasa una id de una cancion y busca ese id en la lista de canciones
+     */
     @GetMapping("/{id}/songs")
     public ResponseEntity<List<GetSongDTO>> findSongsOfPlaylist(@PathVariable Long idLista){
 
@@ -108,12 +159,23 @@ public class PlaylistController {
     }
 
 
+    /**
+     * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
+     * @since v1 5/10/2021
+     * @return Este metodo borra una lista de canciones a traves de la id
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Playlist> delete(@PathVariable Long id){
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
+
+    /**
+     * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
+     * @since v1 5/10/2021
+     * @return Este metodo busca con la id de la canción dentro de la lista de canciones
+     */
     @GetMapping("/{id}/song/{id}")
     public ResponseEntity<Stream<Song>> findSongOfPlayList(@PathVariable Long idList, @PathVariable Long idSong){
         return ResponseEntity.of(repository.findById(idList)
