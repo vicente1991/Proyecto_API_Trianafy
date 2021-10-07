@@ -3,9 +3,9 @@ package com.salesianostriana.dam.trianafy.controller;
 import com.salesianostriana.dam.trianafy.dto.CreateSongDTO;
 import com.salesianostriana.dam.trianafy.dto.GetSongDTO;
 import com.salesianostriana.dam.trianafy.dto.SongDTOConverter;
-import com.salesianostriana.dam.trianafy.model.Artista;
+import com.salesianostriana.dam.trianafy.model.Artist;
 import com.salesianostriana.dam.trianafy.model.Song;
-import com.salesianostriana.dam.trianafy.repository.ArtistaRepository;
+import com.salesianostriana.dam.trianafy.repository.ArtistRepository;
 import com.salesianostriana.dam.trianafy.repository.SongRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,7 +14,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,7 @@ import java.util.stream.Collectors;
 public class SongController {
 
     private final SongRepository repository;
-    private final ArtistaRepository artistaRepository;
+    private final ArtistRepository artistRepository;
     private final SongDTOConverter converter;
 
     @Operation(summary = "Obtiene una lista con todos las canciones existentes")
@@ -105,9 +104,9 @@ public class SongController {
         }
 
         Song nuevo = converter.createSongDtoToSong(songDto);
-        Artista artist = artistaRepository.findById(songDto.getIdartista()).orElse(null);
+        Artist artist = artistRepository.findById(songDto.getIdartista()).orElse(null);
 
-        nuevo.setArtista(artist);
+        nuevo.setArtist(artist);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -138,7 +137,7 @@ public class SongController {
             return ResponseEntity.of(
                     repository.findById(id).map(m -> {
                         m.setTitulo(s.getTitulo());
-                        m.setArtista(s.getArtista());
+                        m.setArtist(s.getArtist());
                         m.setAlbum(s.getAlbum());
                         m.setAnio(s.getAnio());
                         repository.save(m);

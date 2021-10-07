@@ -1,6 +1,5 @@
 package com.salesianostriana.dam.trianafy.dto;
 
-import com.salesianostriana.dam.trianafy.model.Artista;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

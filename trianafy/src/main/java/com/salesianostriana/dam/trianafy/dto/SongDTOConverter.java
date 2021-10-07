@@ -19,7 +19,7 @@ public class SongDTOConverter {
         GetSongDTO result = new GetSongDTO();
         result.setTitulo(s.getTitulo());
         result.setAlbum(s.getAlbum());
-        result.setArtista(s.getArtista().getNombre());
+        result.setArtista(s.getArtist().getNombre());
         result.setAnio(s.getAnio());
         return result;
     }
