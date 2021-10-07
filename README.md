@@ -14,7 +14,7 @@
 * ### Playlist
 </br>
 
-<h2><p><span style="color:red">Las funcionalidades que tiene la entidad Artist:</span></p></h2>
+## ¿Qué puede hacer Trianafy? 
 </br>
 
 
@@ -47,7 +47,7 @@
 9. Borrar una canción de una lista de reproducción
 
 </br>
-No seas duro Luismi @faztweb :wink:
+No seas duro Luismi :wink:
 
 
 
