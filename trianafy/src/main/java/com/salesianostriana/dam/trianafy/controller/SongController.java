@@ -7,6 +7,12 @@ import com.salesianostriana.dam.trianafy.model.Artista;
 import com.salesianostriana.dam.trianafy.model.Song;
 import com.salesianostriana.dam.trianafy.repository.ArtistaRepository;
 import com.salesianostriana.dam.trianafy.repository.SongRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
@@ -15,16 +21,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
-/**
 
- * Esta clase se usa para controllar las canciones (Añadir canciones, ver canciones, editar canciones y eliminarlas)
-
- * @author: Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
-
- * @version: 1
-
- */
-
+@Tag(name = "Song", description = "Controller de las canciones")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/songs")
@@ -34,10 +32,16 @@ public class SongController {
     private final ArtistaRepository artistaRepository;
     private final SongDTOConverter converter;
 
-    /**
-     * Metodo que devuelve todas las canciones existentes
-     * @return Devuelve que devuelve todas las canciones existentes
-     */
+    @Operation(summary = "Obtiene una lista con todos las canciones existentes")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado las canciones",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Song.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se ha encontrado ninguna lista con canciones",
+                    content = @Content),
+    })
     @GetMapping("/")
     public ResponseEntity<List<GetSongDTO>> findAll() {
 
@@ -60,38 +64,47 @@ public class SongController {
     }
 
 
-    /*
-   Este metodo ayuda a buscar una sola canción por su id
-    */
-
-
-
-
-
-    /**
-     * Metodo que devuelve los datos de una cancion en concreto
-     * @return Devuelve los datos de una cancion en concreto
-     */
-
+    @Operation(summary = "Obtiene una canción a partir de su id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado las canciones",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Song.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se ha encontrado la canción buscada",
+                    content = @Content),
+    })
     @GetMapping("/{id}")
     public ResponseEntity findOne(@PathVariable Long id) {
-        return ResponseEntity
-                .of(repository.findById(id));
+
+        if(repository.findById(id).isEmpty()){
+            return ResponseEntity.notFound().build();
+
+        }else {
+            return ResponseEntity
+                    .of(repository.findById(id));
+        }
     }
 
-    /**
-     * Metodo que crea una cancion
-     */
+    @Operation(summary = "Crea una canción nueva")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Se ha creado y guardado la canción",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Song.class))}),
+            @ApiResponse(responseCode = "400",
+                    description = "No se ha guardado la canción porque ha habido un error" +
+                            "en los datos enviados",
+                    content = @Content),
+    })
     @PostMapping("/")
     public ResponseEntity<Song> create(@RequestBody CreateSongDTO songDto) {
-
 
         if(songDto.getIdartista()==null){
             return ResponseEntity.badRequest().build(); //Código 400, petición errónea
         }
 
         Song nuevo = converter.createSongDtoToSong(songDto);
-
         Artista artist = artistaRepository.findById(songDto.getIdartista()).orElse(null);
 
         nuevo.setArtista(artist);
@@ -101,30 +114,49 @@ public class SongController {
                 .body(repository.save(nuevo));
 
     }
-    /**
-     * Metodo que edita los datos de la cancion
-     * @return Devuelve los datos de la cancion editados
-     */
+
+    @Operation(summary = "Editamos una canción existente")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se ha guardado la canción actualizada",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Song.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se ha guardado la canción porque ha habido un error" +
+                            "en los datos enviados",
+                    content = @Content),
+    })
     @PutMapping("/{id}")
     public ResponseEntity<Song> edit(
             @RequestBody Song s,
             @PathVariable Long id) {
 
-        return ResponseEntity.of(
-                repository.findById(id).map(m -> {
-                    m.setTitulo(s.getTitulo());
-                    m.setArtista(s.getArtista());
-                    m.setAlbum(s.getAlbum());
-                    m.setAnio(s.getAnio());
-                    repository.save(m);
-                    return m;
-                })
-        );
+        if(repository.findById(id).isEmpty()){
+            return ResponseEntity.badRequest().build();
 
+        } else {
+            return ResponseEntity.of(
+                    repository.findById(id).map(m -> {
+                        m.setTitulo(s.getTitulo());
+                        m.setArtista(s.getArtista());
+                        m.setAlbum(s.getAlbum());
+                        m.setAnio(s.getAnio());
+                        repository.save(m);
+                        return m;
+                    })
+            );
+        }
     }
-    /**
-     * Metodo que borrar los datos de la cancion
-     */
+
+
+    @Operation(summary = "Borramos una canción")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Se ha borrado correctamente",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Song.class))})
+            })
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id){
         repository.deleteById(id);
