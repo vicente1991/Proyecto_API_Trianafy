@@ -120,9 +120,11 @@ public class ArtistController {
 
         }else {
             return ResponseEntity.of(
+
                     artistRepository.findById(id).map(m -> {
                         m.setNombre(a.getNombre());
                         artistRepository.save(m);
+
                         return m;
                     })
             );

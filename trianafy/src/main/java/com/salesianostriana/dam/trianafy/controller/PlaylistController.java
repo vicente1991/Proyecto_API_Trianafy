@@ -164,7 +164,7 @@ public class PlaylistController {
             return ResponseEntity.badRequest().build();
         }else {
             lista.get().getListaCanciones().add(cancion.get());
-
+            
             return ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body(repository.save(lista.get()));
@@ -184,9 +184,9 @@ public class PlaylistController {
                     content = @Content),
     })
     @GetMapping("/{id}/songs")
-    public ResponseEntity<List<GetSongDTO>> findSongsOfPlaylist(@PathVariable Long idLista){
+    public ResponseEntity <List<GetSongDTO>> findSongsOfPlaylist(@PathVariable Long id){
 
-        Optional<Playlist> optPlaylist = repository.findById(idLista);
+        Optional<Playlist> optPlaylist = repository.findById(id);
 
         if(optPlaylist.isEmpty()){
             return ResponseEntity.notFound().build();
@@ -205,16 +205,14 @@ public class PlaylistController {
     }
 
 
-    @Operation(summary = "Borra una lista de dentro de las listas de reproducción a traves de su id")
+    @Operation(summary = "Borra una lista de  reproducción a través de su id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204",
-                    description = "Se ha encontrado las listas",
+                    description = "Se ha borrado la lista",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Playlist.class))}),
-            @ApiResponse(responseCode = "400",
-                    description = "No se ha encontrado ninguna lista",
-                    content = @Content),
-    })
+                            schema = @Schema(implementation = Playlist.class))})
+
+            })
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Playlist> delete(@PathVariable Long id){
@@ -234,8 +232,8 @@ public class PlaylistController {
                     content = @Content),
     })
 
-    @GetMapping("/{id1}/song/{id2}")
-    public ResponseEntity<Song> findSongOfPlayList(@PathVariable ("id1") Long idList, @PathVariable ("id2") Long idSong){
+    @GetMapping("/{idList}/songs/{idSong}")
+    public ResponseEntity<Song> findSongOfPlayList(@PathVariable Long idList, @PathVariable Long idSong){
 
         Optional <Playlist> opLista = repository.findById(idList);
 
