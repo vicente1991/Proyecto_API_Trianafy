@@ -17,12 +17,12 @@ public class Song {
     @GeneratedValue
     private Long id;
     private String titulo;
-
     @ManyToOne
     private Artist artist;
-
     private String album;
     private String anio;
+
+
 
     public Song( String titulo, String album, String anio) {
 
