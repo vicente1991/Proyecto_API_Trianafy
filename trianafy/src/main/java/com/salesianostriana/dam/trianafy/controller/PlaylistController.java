@@ -5,6 +5,11 @@ import com.salesianostriana.dam.trianafy.model.Playlist;
 import com.salesianostriana.dam.trianafy.model.Song;
 import com.salesianostriana.dam.trianafy.repository.PlaylistRepository;
 import com.salesianostriana.dam.trianafy.repository.SongRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,11 +39,16 @@ public class PlaylistController {
     private final SongRepository songRepository;
     private final SongDTOConverter songDTOConverter;
 
-    /**
-     * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
-     * @since v1 5/10/2021
-     * @return Este método devuelve todas las playlist existentes
-     */
+    @Operation(summary = "Obtiene todas las listas de listas de reproducción")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se ha encontrado las listas",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Song.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se ha encontrado ninguna lista",
+                    content = @Content),
+    })
     @GetMapping("/")
     public ResponseEntity<List<GetPlaylistContDTO>> findAll(){
 
@@ -57,11 +67,16 @@ public class PlaylistController {
     }
 
 
-    /**
-     * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
-     * @since v1 5/10/2021
-     * @return Este método devuelve una playlist a traves de la id
-     */
+    @Operation(summary = "Obtiene una  lista de reproducción a traves de su id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se ha encontrado las listas",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Song.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se ha encontrado ninguna lista",
+                    content = @Content),
+    })
     @GetMapping("/{id}")
     public ResponseEntity<Playlist> findOne(@PathVariable Long id){
 
@@ -70,11 +85,16 @@ public class PlaylistController {
 
     }
 
-    /**
-     * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
-     * @since v1 5/10/2021
-     * @return Este método añade una nueva playlist
-     */
+    @Operation(summary = "Crea una listas de reproducción")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Se ha encontrado las listas",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Song.class))}),
+            @ApiResponse(responseCode = "400",
+                    description = "No se ha encontrado ninguna lista",
+                    content = @Content),
+    })
     @PostMapping("/")
     public ResponseEntity<Playlist> add(@RequestBody CreatePlaylistDTO p){
 
@@ -90,12 +110,16 @@ public class PlaylistController {
 
     }
 
-    /**
-     * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
-     * @since v1 5/10/2021
-     * @return Este método edita una playlist a partir de una id
-     */
-
+    @Operation(summary = "Edita una lista de listas de reproducción a traves de su id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se ha encontrado las listas",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Song.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se ha encontrado ninguna lista",
+                    content = @Content),
+    })
     @PutMapping("/{id}")
     public ResponseEntity<Playlist> edit(
         @RequestBody Playlist p,
@@ -110,6 +134,16 @@ public class PlaylistController {
 
 
 
+    @Operation(summary = "Inserta una cancion dentro de una lista de listas de reproducción")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Se ha encontrado las listas",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Song.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se ha encontrado ninguna lista",
+                    content = @Content),
+    })
     @PostMapping("/{idPlaylist}/songs/{idSong}")
     public ResponseEntity<Playlist> addSongToPlaylist(@RequestBody Playlist playlist, @PathVariable Long idPlaylist,
                                                 @PathVariable Long idSong) {
@@ -132,11 +166,16 @@ public class PlaylistController {
     }
 
 
-    /**
-     * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
-     * @since v1 5/10/2021
-     * @return Este método se le pasa una id de una cancion y busca ese id en la lista de canciones
-     */
+    @Operation(summary = "Obtiene las canciones de dentro de las listas de reproducción")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se ha encontrado las listas",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Song.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se ha encontrado ninguna lista",
+                    content = @Content),
+    })
     @GetMapping("/{id}/songs")
     public ResponseEntity<List<GetSongDTO>> findSongsOfPlaylist(@PathVariable Long idLista){
 
@@ -158,11 +197,16 @@ public class PlaylistController {
     }
 
 
-    /**
-     * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
-     * @since v1 5/10/2021
-     * @return Este método borra una lista de canciones a traves de la id
-     */
+    @Operation(summary = "Borra una lista de dentro de las listas de reproducción a traves de su id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Se ha encontrado las listas",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Song.class))}),
+            @ApiResponse(responseCode = "400",
+                    description = "No se ha encontrado ninguna lista",
+                    content = @Content),
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Playlist> delete(@PathVariable Long id){
         repository.deleteById(id);
@@ -170,11 +214,16 @@ public class PlaylistController {
     }
 
 
-    /**
-     * @author Juan Carlos Ardana, Maria Inmaculada Dominguez, Vicente Rufo
-     * @since v1 5/10/2021
-     * @return Este método busca con la id de la canción dentro de la lista de canciones
-     */
+    @Operation(summary = "Obtiene una cancion de una de las listas de todas las listas de reproducción a traves de sus ids")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se ha encontrado las listas",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Song.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se ha encontrado ninguna lista",
+                    content = @Content),
+    })
     @GetMapping("/{id1}/song/{id2}")
     public ResponseEntity<Song> findSongOfPlayList(@PathVariable ("id1") Long idList, @PathVariable ("id2") Long idSong){
         /*return ResponseEntity.of(repository.findById(idList)
