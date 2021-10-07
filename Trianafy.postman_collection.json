@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fe944c8e-5a18-4dac-bc0b-5ed420897fc7",
+		"_postman_id": "467046e2-5f6e-4edb-b97c-31005be64069",
 		"name": "Trianafy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\" : \"Canta en la ducha\",\r\n    \"descripcion\" : \"Disfruta unos minutos de relax escuchando las últimas tendencias musicales\"\r\n  \r\n}",
+							"raw": "{\r\n    \"nombre\" : \"Canta en la ducha\",\r\n    \"descripcion\" : \"Disfruta unos minutos de relax escuchando las últimas tendencias musicales\",\r\n    \"listaCanciones\" : [{ \"titulo\" : \"Blank Space\",\r\n    \"idartista\" : 1,\r\n    \"album\" : \"Red\",\r\n    \"anio\" : \"16\"}]\r\n  \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -41,8 +41,17 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\" : \"Canta en la ducha\",\r\n    \"descripcion\" : \"Disfruta unos minutos de relax escuchando las últimas tendencias musicales\",\r\n    \"listaCanciones\" : [{ \"titulo\" : \"Háblame de mí\",\r\n    \"idartista\" : 1,\r\n    \"album\" : \"Blue\",\r\n    \"anio\" : \"19\"}]\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:8080/lists/3/songs/2",
+							"raw": "localhost:8080/lists/3/songs/4",
 							"host": [
 								"localhost"
 							],
@@ -51,6 +60,46 @@
 								"lists",
 								"3",
 								"songs",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todas las listas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/lists/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lists",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver detalles de una lista",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/lists/3/song/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lists",
+								"3",
+								"song",
 								"2"
 							]
 						}
@@ -67,7 +116,9 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				},
@@ -111,7 +162,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"titulo\" : \"Blank Space\",\r\n    \"idartista\" : 2,\r\n    \"album\" : \"Red\",\r\n    \"anio\" : \"16\"\r\n}",
+							"raw": "{\r\n    \"titulo\" : \"Blank Space\",\r\n    \"idartista\" : 1,\r\n    \"album\" : \"Red\",\r\n    \"anio\" : \"16\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
