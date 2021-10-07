@@ -19,7 +19,7 @@ public class Song {
     private String titulo;
 
     @ManyToOne
-    private Artista artista;
+    private Artist artist;
 
     private String album;
     private String anio;
