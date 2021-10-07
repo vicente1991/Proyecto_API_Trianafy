@@ -122,7 +122,7 @@ public class ArtistController {
         }else {
             return ResponseEntity.of(
                     artistaRepository.findById(id).map(m -> {
-                        a.setNombre(a.getNombre());
+                        m.setNombre(a.getNombre());
                         artistaRepository.save(m);
                         return m;
                     })
