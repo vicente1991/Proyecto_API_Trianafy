@@ -4,9 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+
     <list default="true" id="5d13a54c-eeae-4068-8025-12f376ab3d42" name="Changes" comment="">
+
+    <list default="true" id="94849522-b939-45f7-a021-6661bda32464" name="Changes" comment="">
+
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trianafy/src/main/java/com/salesianostriana/dam/trianafy/controller/ArtistController.java" beforeDir="false" afterPath="$PROJECT_DIR$/trianafy/src/main/java/com/salesianostriana/dam/trianafy/controller/ArtistController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trianafy/src/main/java/com/salesianostriana/dam/trianafy/controller/PlaylistController.java" beforeDir="false" afterPath="$PROJECT_DIR$/trianafy/src/main/java/com/salesianostriana/dam/trianafy/controller/PlaylistController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trianafy/src/main/java/com/salesianostriana/dam/trianafy/model/Artist.java" beforeDir="false" afterPath="$PROJECT_DIR$/trianafy/src/main/java/com/salesianostriana/dam/trianafy/model/Artist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trianafy/src/main/java/com/salesianostriana/dam/trianafy/model/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/trianafy/src/main/java/com/salesianostriana/dam/trianafy/model/Song.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feat-hu16" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,9 +47,9 @@
     </option>
     <option name="myId2Visible">
       <map>
-        <entry key="JPA Inspector" value="true" />
+        <entry key="JPA Inspector" value="false" />
         <entry key="JPA Palette" value="false" />
-        <entry key="JPA Structure" value="true" />
+        <entry key="JPA Structure" value="false" />
       </map>
     </option>
   </component>
