@@ -3,9 +3,9 @@
 * ### Juan Carlos Ardana
 * ### M.ª Inmaculada Domínguez Vargas
 * ### Vicente Rufo Bru
+</br>
 
-
-> ### **Trianafy** es una aplicacion la cual nos permite crear nuestras propias playlist con artistas de cualquier tipo y cualquier rama musical.
+> ### **Trianafy** es una aplicación la cual nos permite crear nuestras propias playlist con artistas de cualquier tipo y cualquier rama musical.
 
 
 ### Las entidades que forman nuestra aplicación son:
