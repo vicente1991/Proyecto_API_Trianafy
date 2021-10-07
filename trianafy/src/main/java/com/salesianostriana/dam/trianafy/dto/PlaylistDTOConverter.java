@@ -30,7 +30,7 @@ public class PlaylistDTOConverter {
                 nombre(p.getNombre())
                 .descripcion(p.getDescripcion())
                 .id(p.getId())
-                .contador(0)
+                .contador(p.getListaCanciones().size())
                 .build();
     }
 
