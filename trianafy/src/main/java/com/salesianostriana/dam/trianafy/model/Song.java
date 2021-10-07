@@ -17,10 +17,6 @@ public class Song {
     @GeneratedValue
     private Long id;
     private String titulo;
-
-    @ManyToOne
-    private Artista artista;
-
     private String album;
     private String anio;
 
