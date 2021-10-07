@@ -29,9 +29,7 @@ import java.util.stream.Stream;
 @Tag(name = "Playlist", description = "Controller de las playlists")
 @RestController
 @RequiredArgsConstructor
-
 @RequestMapping("/lists")
-
 public class PlaylistController {
 
     private final PlaylistRepository repository;
