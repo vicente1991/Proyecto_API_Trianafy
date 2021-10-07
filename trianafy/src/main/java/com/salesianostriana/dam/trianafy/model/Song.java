@@ -19,6 +19,8 @@ public class Song {
     private String titulo;
     private String album;
     private String anio;
+    @ManyToOne
+    private Artista artista;
 
     public Song( String titulo, String album, String anio) {
 

@@ -23,17 +23,4 @@ public class Artista {
     private Long id;
     private String nombre;
 
-    @OneToMany
-    private List<Song> canciones = new ArrayList<>();
-
-    public void addCancion(Song c) {canciones.add(c);}
-    public void deleteCancion(Long id){
-        for(Song cancion: canciones){
-            if (cancion.getId()==id) canciones.remove(cancion);
-        }
-
-
-    }
-
-
 }
