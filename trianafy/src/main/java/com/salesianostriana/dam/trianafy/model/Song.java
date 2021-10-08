@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.trianafy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,11 +18,14 @@ public class Song {
     @GeneratedValue
     private Long id;
     private String titulo;
+
+
+    @JsonIgnoreProperties
     @ManyToOne
     private Artist artist;
+
     private String album;
     private String anio;
-
 
 
     public Song( String titulo, String album, String anio) {

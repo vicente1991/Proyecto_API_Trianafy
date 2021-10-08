@@ -4,8 +4,10 @@ import com.salesianostriana.dam.trianafy.dto.CreateSongDTO;
 import com.salesianostriana.dam.trianafy.dto.GetSongDTO;
 import com.salesianostriana.dam.trianafy.dto.SongDTOConverter;
 import com.salesianostriana.dam.trianafy.model.Artist;
+import com.salesianostriana.dam.trianafy.model.Playlist;
 import com.salesianostriana.dam.trianafy.model.Song;
 import com.salesianostriana.dam.trianafy.repository.ArtistRepository;
+import com.salesianostriana.dam.trianafy.repository.PlaylistRepository;
 import com.salesianostriana.dam.trianafy.repository.SongRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -19,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Tag(name = "Song", description = "Controller de las canciones")
@@ -30,6 +33,7 @@ public class SongController {
     private final SongRepository repository;
     private final ArtistRepository artistRepository;
     private final SongDTOConverter converter;
+    private final PlaylistRepository playlistRepository;
 
     @Operation(summary = "Obtiene una lista con todos las canciones existentes")
     @ApiResponses(value = {
@@ -158,6 +162,10 @@ public class SongController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id){
+
+        Optional <Playlist> listaCanciones;
+        //Hay poner a null la canción dentro de la lista
+
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
 
