@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.trianafy.controller;
 
 import com.salesianostriana.dam.trianafy.model.Artist;
+import com.salesianostriana.dam.trianafy.model.Song;
 import com.salesianostriana.dam.trianafy.repository.ArtistRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -142,6 +143,13 @@ public class ArtistController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
+
+        List <Song> listaCanciones = artistRepository.getById(id).getListaCanciones();
+
+        for(Song cancion : listaCanciones){
+            cancion.setArtist(null);
+        }
+
         artistRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
