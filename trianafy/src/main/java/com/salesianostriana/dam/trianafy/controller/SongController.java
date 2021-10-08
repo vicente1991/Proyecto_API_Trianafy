@@ -35,6 +35,7 @@ public class SongController {
     private final SongDTOConverter converter;
     private final PlaylistRepository playlistRepository;
 
+
     @Operation(summary = "Obtiene una lista con todos las canciones existentes")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
@@ -162,11 +163,22 @@ public class SongController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id){
+        
+        Optional<Song> theSong = repository.findById(id);
 
-        Optional <Playlist> listaCanciones;
-        //Hay poner a null la canción dentro de la lista
+        if (theSong.isPresent()) {
 
-        repository.deleteById(id);
+            List <Playlist> lists = playlistRepository.listasConCanciones(theSong.get());
+            if (!lists.isEmpty()) {
+                //lists.remove(theSong.get());
+                for(Playlist p : lists) {
+                    p.getListaCanciones().remove(theSong.get());
+                    playlistRepository.save(p);
+                }
+
+            }
+            repository.deleteById(id);
+        }
         return ResponseEntity.noContent().build();
 
     }

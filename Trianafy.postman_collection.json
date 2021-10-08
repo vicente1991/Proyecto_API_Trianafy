@@ -1,8 +1,6 @@
 {
 	"info": {
-
 		"_postman_id": "d19f4ef8-a429-4d67-847c-60cc4de2281b",
-
 		"name": "Trianafy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -17,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\" : \"Canta en la ducha\",\r\n    \"descripcion\" : \"Disfruta unos minutos de relax escuchando las últimas tendencias musicales\",\r\n    \"listaCanciones\" : [{ \"titulo\" : \"Blank Space\",\r\n    \"idartista\" : 1,\r\n    \"album\" : \"Red\",\r\n    \"anio\" : \"16\"}]\r\n  \r\n}",
+							"raw": "{\r\n    \"nombre\" : \"Canta en la ducha\",\r\n    \"descripcion\" : \"Disfruta unos minutos de relax escuchando las últimas tendencias musicales\"\r\n  \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -94,7 +92,6 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:8080/lists/3/songs/2",
-
 							"host": [
 								"localhost"
 							],
@@ -162,7 +159,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "localhost:8080/lists/3/songs",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lists",
+								"3",
+								"songs"
+							]
 						}
 					},
 					"response": []
@@ -193,7 +199,6 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:8080/lists/3/songs/2",
-
 							"host": [
 								"localhost"
 							],
@@ -205,62 +210,6 @@
 								"2"
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Borrar playlist",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/lists/3",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"lists",
-								"3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Modificar lista",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\" : \"Cantar en la ducha con Trianafy\",\r\n    \"descripcion\" : \"Disfruta unos minutos de relax escuchando las últimas tendencias musicales\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/lists/3",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"lists",
-								"3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Obtener canciones de una playlist",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": null
 					},
 					"response": []
 				}
@@ -275,7 +224,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "localhost:8080/artist/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"artist",
+								""
+							]
 						}
 					},
 					"response": []
@@ -323,13 +280,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/artista/1",
+							"raw": "localhost:8080/artist/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"artista",
+								"artist",
 								"1"
 							]
 						}
@@ -337,7 +294,6 @@
 					"response": []
 				},
 				{
-
 					"name": "Borrar artista",
 					"request": {
 						"method": "DELETE",
@@ -353,13 +309,25 @@
 								"1"
 							]
 						}
-
-					"name": "New Request",
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar artista",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": null
-
+						"url": {
+							"raw": "localhost:8080/artist/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"artist",
+								"1"
+							]
+						}
 					},
 					"response": []
 				}
@@ -401,16 +369,15 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-
 						"url": {
-							"raw": "localhost:8080/songs/",
+							"raw": "localhost:8080/songs/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"songs",
-								""
+								"2"
 							]
 						}
 					},
@@ -441,16 +408,12 @@
 								"2"
 							]
 						}
-
-						"url": null
-
 					},
 					"response": []
 				},
 				{
 					"name": "Borrar canción",
 					"request": {
-
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -464,11 +427,25 @@
 								"2"
 							]
 						}
-
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar una canción",
+					"request": {
 						"method": "GET",
 						"header": [],
-						"url": null
-
+						"url": {
+							"raw": "localhost:8080/songs/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songs",
+								"2"
+							]
+						}
 					},
 					"response": []
 				}
