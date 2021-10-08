@@ -34,7 +34,7 @@
 4. Modificar el contenido de una canción
 5. Borrar una canción
 
-* ### **Las funcionalidades que tiene la entidad Song:**
+* ### **Las funcionalidades que tiene la entidad PLaylist:**
 
 1. Añadir una nueva lista de reproducción
 2. Ver todas las listas de reproducción existentes
