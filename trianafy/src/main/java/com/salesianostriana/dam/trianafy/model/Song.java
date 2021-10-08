@@ -20,13 +20,12 @@ public class Song {
     private String titulo;
 
 
-    @ManyToOne
     @JsonIgnoreProperties
+    @ManyToOne
     private Artist artist;
 
     private String album;
     private String anio;
-
 
 
     public Song( String titulo, String album, String anio) {

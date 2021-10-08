@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.trianafy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class Artist {
     private Long id;
     private String nombre;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "artist", cascade = {CascadeType.PERSIST})
     private List <Song> listaCanciones;
 
