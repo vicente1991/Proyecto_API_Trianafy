@@ -249,16 +249,15 @@ public class PlaylistController {
     }
 
     @DeleteMapping("{idPlaylist}/songs/{idSong}")
-    public ResponseEntity<Playlist>delete(@PathVariable Long idPlaylist, @PathVariable Long idSong) {
-        List<Song> lista = repository.getById(idPlaylist).getListaCanciones();
+    public ResponseEntity<Playlist>delete(@RequestBody Playlist playlist,@PathVariable Long idPlaylist, @PathVariable Long idSong) {
+        Optional <Playlist> lista = repository.findById(idPlaylist);
+
         if (repository.findById(idPlaylist).isEmpty() ||
                 !repository.findById(idPlaylist).get().getListaCanciones().contains(songRepository.getById(idSong))) {
             return ResponseEntity.notFound().build();
         } else {
-            repository
-                    .findById(idPlaylist)
-                    .get()
-                    .getListaCanciones().remove(songRepository.getById(idSong));
+            lista.get().getListaCanciones().remove(songRepository.findById(idSong).get());
+            repository.save(lista.get());
             return ResponseEntity.noContent().build();
         }
     }
