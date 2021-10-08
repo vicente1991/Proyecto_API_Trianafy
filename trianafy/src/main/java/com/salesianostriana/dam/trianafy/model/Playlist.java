@@ -20,8 +20,7 @@ public class Playlist {
     private String nombre;
     private String descripcion;
 
-    @ManyToMany
-    @ElementCollection
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Song> listaCanciones;
 
     public Playlist(Long id, String nombre, String descripcion) {
