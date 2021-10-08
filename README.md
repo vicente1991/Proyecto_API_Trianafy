@@ -1,21 +1,33 @@
 # **Proyecto API Trianafy**
-> ## **Trabajo realizado por:**
-* ### Juan Carlos Ardana
-* ### M.ª Inmaculada Domínguez Vargas
-* ### Vicente Rufo Bru
+
+***Trianafy** es una aplicación que nos permite, no solo crear nuestras propias playlist, sino también artistas e incluso canciones que se pueden asignar a los artistas que deseemos de cualquier tipo y cualquier rama musical.*
+</br>
+> ## ✒️ **Autores ✒️**
+* #### Juan Carlos Ardana
+* #### M.ª Inmaculada Domínguez Vargas
+* #### Vicente Rufo Bru
 </br>
 
-> ### **Trianafy** es una aplicación la cual nos permite crear nuestras propias playlist con artistas de cualquier tipo y cualquier rama musical.
 
-
-### Las entidades que forman nuestra aplicación son:
-* ### Artist
-* ### Song
-* ### Playlist
+### 📋 Las entidades que forman nuestra aplicación 📋
+* #### Artist :microphone:
+  - Artist (model)
+  - ArtistRepository
+  - ArtistController
+  
+* #### Song :headphones:
+  - Song (model)
+  - SongRepository
+  - SongController
+  - Song DTOs
+* #### Playlist :musical_score:
+  - Playlist (model)
+  - PlaylistRepository
+  - PlaylistController
+  - Playlist DTOs
 </br>
 
-## ¿Qué puede hacer Trianafy? 
-</br>
+## 🛠️ ¿Qué puede hacer Trianafy? 🛠️
 
 
 * ### **Las funcionalidades que tiene la entidad Artist:**
@@ -47,6 +59,9 @@
 9. Borrar una canción de una lista de reproducción
 
 </br>
+
+## 🎁 Expresiones de Gratitud 🎁
+
 No seas duro Luismi :wink:
 
 
