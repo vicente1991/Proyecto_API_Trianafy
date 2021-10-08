@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "467046e2-5f6e-4edb-b97c-31005be64069",
+		"_postman_id": "d19f4ef8-a429-4d67-847c-60cc4de2281b",
 		"name": "Trianafy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -43,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\" : \"Canta en la ducha\",\r\n    \"descripcion\" : \"Disfruta unos minutos de relax escuchando las últimas tendencias musicales\",\r\n    \"listaCanciones\" : [{ \"titulo\" : \"Háblame de mí\",\r\n    \"idartista\" : 1,\r\n    \"album\" : \"Blue\",\r\n    \"anio\" : \"19\"}]\r\n  \r\n}",
+							"raw": "{\r\n    \"nombre\" : \"Canta en la ducha\",\r\n    \"descripcion\" : \"Disfruta unos minutos de relax escuchando las últimas tendencias musicales\",\r\n    \"listaCanciones\" : [{\r\n            \"titulo\" : \"Blank Space\",\r\n            \"idartista\" : 1,\r\n            \"album\" : \"Red\",\r\n            \"anio\" : \"16\"\r\n        }]\r\n  \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -51,7 +51,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/lists/3/songs/4",
+							"raw": "localhost:8080/lists/3/songs/2",
 							"host": [
 								"localhost"
 							],
@@ -60,7 +60,7 @@
 								"lists",
 								"3",
 								"songs",
-								"4"
+								"2"
 							]
 						}
 					},
@@ -91,7 +91,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/lists/3/song/2",
+							"raw": "localhost:8080/lists/3/songs/2",
 							"host": [
 								"localhost"
 							],
@@ -99,7 +99,105 @@
 							"path": [
 								"lists",
 								"3",
-								"song",
+								"songs",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar playlist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/lists/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lists",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar lista",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\" : \"Cantar en la ducha con Trianafy\",\r\n    \"descripcion\" : \"Disfruta unos minutos de relax escuchando las últimas tendencias musicales\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/lists/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lists",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener canciones de una playlist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver una lista",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/lists/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lists",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar canción de una playlist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/lists/3/songs/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lists",
+								"3",
+								"songs",
 								"2"
 							]
 						}
@@ -112,7 +210,7 @@
 			"name": "Artist",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Buscar artistas",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -123,7 +221,7 @@
 					"response": []
 				},
 				{
-					"name": "Artista",
+					"name": "Crear artista",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -137,14 +235,61 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/artista/",
+							"raw": "localhost:8080/artist/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"artist",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar artista",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\" : \"Taylor Swift\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/artista/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"artista",
-								""
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar artista",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/artist/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"artist",
+								"1"
 							]
 						}
 					},
@@ -178,6 +323,72 @@
 							"path": [
 								"songs",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar canciones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/songs/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songs",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar canción",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"titulo\": \"Blank Space\",\r\n    \"artist\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Taylor Swift\"\r\n    },\r\n    \"album\": \"Red\",\r\n    \"anio\": \"18\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/songs/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songs",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar canción",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/songs/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songs",
+								"2"
 							]
 						}
 					},
